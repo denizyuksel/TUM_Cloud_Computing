@@ -93,6 +93,15 @@ app.post('/api/books/', (req, res) => {
    * TODO: use the books model and create a new object
    * with the information in req.body
    */
+
+  // Could also do like that!
+  // db.books.create(req.body, (err, newBook) => {
+  //   if (err) return console.error(err);
+  //   res.json(newBook);
+  // })
+
+
+
   const addedBook = new BooksModel(req.body);
   addedBook.save((err, addedBook) => {
     if (err) return console.error(err);
@@ -121,6 +130,13 @@ app.put('/api/books/:id', (req, res) => {
   /*
    * TODO: use the books model and find using the bookId and update the book information
    */
+  // Could also do like that:
+  // db.books.findOneAndUpdate( {_id: bookId}, bookNewData, {new:true}, (err, updatedBookInfo) => {
+  //   if( err) throw err;
+  //   res.json(updatedBookInfo);
+  // })
+
+
   BooksModel.findByIdAndUpdate(bookId, bookNewData, function (err, result) {
     if (err) return console.error(err);
     console.log("Book updated successfully!");
@@ -143,6 +159,13 @@ app.delete('/api/books/:id', (req, res) => {
    * TODO: use the books model and find using
    * the bookId and delete the book
    */
+
+  // Could also do like that:
+  // db.books.findOneAndRemove({ _id: bookId }, (err, deletedBookInfo) => {
+  //   if (err) throw err;
+  //   res.json(deletedBookInfo);
+  // })
+
   BooksModel.findByIdAndDelete(bookId, function (err, delBook) {
     if (err) return console.error(err);
     console.log("Book deleted succesfully: ", delBook);
